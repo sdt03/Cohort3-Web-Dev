@@ -1,0 +1,143 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: gray;
+}
+
+.buttonBanner{
+    color: #9ba3b4;
+    background-color: rgba(255,255,255,0.04);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 32px;
+    border: 1px solid rgba(255,255,255,0.07);
+}
+
+.bannerLink{
+    padding-right: 8px;
+}
+
+.hero{
+    background-color: black;
+    color: white;
+    display: flex;
+}
+
+.heroContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px auto;
+    max-width: 1200px;
+}
+
+.container{
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.verticalCenter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.navLink{
+    padding-left: 20px;
+    color: gray;
+}
+
+.banner{
+    padding: 10px;
+    background-color: black;
+    color: gray;
+    font-size: 14px;
+    max-width: 1200;
+    display: flex;
+    justify-content: center;
+    margin: 0px auto;
+}
+
+.flex{
+    display: flex;
+}
+
+.topImage{
+    padding-right: 12px;
+}
+
+.navLink:hover{
+    color: white;
+}
+
+.searchInput{
+    border-radius: 5px;
+    border: 1px solid rgb(255, 255, 255, 0.2);
+    padding: 8px;
+    font-size: 16px;
+    background-color: black;
+}
+
+.downloadButton{
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    padding: 7px;
+    padding-left: 0px;
+    width: 120px;
+    padding-right: 0px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.searchContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+header{
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+header h1{
+    margin: 0;
+    font-size: 2em;
+}
+
+.cta-button{
+    display: inline-block;
+    background: #0078d4;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.cta-button:hover{
+    background: red;
+}
+
+.hero h2{
+    font-size: 3em;
+    margin: 0;
+}
+

@@ -1,0 +1,21 @@
+<body>
+    <input type="text" placeholder="add todo">
+    <button onclick="addTodo()">Add todo!</button>
+    <script>
+        let todos = [];
+        function addTodo(){
+            todos.push({
+                title: document.querySelector("input").value
+            });
+            render();
+        }
+
+        function render(){
+            document.querySelector("#todos").innerHTML="";
+            for(let i=0; i<todos.length;i++){
+                
+            
+            }
+        }
+    </script>
+</body> 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Website</title>
+</head>
+<body>
+    <div id="signup-container" class="signup-container">
+        Signup
+        <input id="signup-username" type="text" name="username" placeholder="Username">
+        <input id="signup-password " type="text" name="password" placeholder="Password">
+        <button onclick="singup()">Submit</button>
+    </div>
+    <div id="signin-container" class="signin-container">
+        Signin
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="password" placeholder="Password">
+        <button onclick="singin()">Submit</button>
+    </div>
+    <div>
+        User Information:
+        <div id="information"></div>
+    </div>
+    <div>
+        <button onclick="logout()">Logout</button>
+    </div>
+    
+</body>
+</html>
