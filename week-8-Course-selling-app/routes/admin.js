@@ -1,9 +1,10 @@
 const adminRouter =  require("express").Router();
-const { adminModel } = require("../db");
+const { adminModel, courseModel } = require("../db");
 const jwt_admin = "admin123";
 const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const bcrypt = require("bcrypt");
+const {adminAuthMiddleware} = require("../middleware/admin");
 
 adminRouter.post("/signup", async (req, res)=>{
     const requiredBody = z.object({
@@ -74,6 +75,39 @@ adminRouter.post("/login", async (req, res) => {
     }
 });
 
+adminRouter.put("/course", async(req, res)=>{
+    const adminId = req.userId;
+
+    const { title, description, price, imageUrl, courseId } =  req.userId;
+
+    const course = await courseModel.updateOne({
+        id: courseId,
+        creatorId: adminId
+    }, {
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        price: price
+    });
+
+    res.json({
+        message: "Updated course",
+        courseId: course._id
+    });
+})
+
+adminRouter("/course/bulk", adminAuthMiddleware, async (req, res)=>{
+    const adminId = req.userId;
+
+    const course = await courseModel.find({
+        creatorId: adminId
+    });
+
+    res.json({
+        message: "Fetched courses",
+        course
+    });
+})
 
 module.exports = {
     adminRouter
