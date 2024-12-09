@@ -67,7 +67,7 @@ router.post("/login", async function (req, res){
         })
         
     } catch (e) {
-        res.status(500).json({
+        res.status(403).json({
             message: "Invalid Credentails"
         })
     }
