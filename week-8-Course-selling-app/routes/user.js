@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { userModel } = require("../db");
+const { userModel, courseModel } = require("../db");
 const jwt = require("jsonwebtoken");
 const { JWT_USER_PASSWORD } = require("../config");
 const { z } = require("zod");
@@ -71,7 +71,15 @@ router.post("/login", async function (req, res){
             message: "Invalid Credentails"
         })
     }
-})
+});
+
+userRouter.get("/purchases", userAuthMiddleware, async(req, res)=>{
+    const userId = req.userId;
+    const courses = await courseModel.find({userId});
+    res.json({
+        courses
+    });
+});
 
 module.exports = {
     router
