@@ -1,25 +1,37 @@
 import { useState } from "react";
+import { PostComponent } from "./Post";
 
 function App(){
-  return <div>
-    <Counter></Counter>
-  </div>
-}
+  const [posts, setPosts] = useState([]);
 
-function Counter(){
-  const [count, setCount] = useState(0);
-
-  function increaseCount(){
-    setCount(count+1);
+  const postComponents = posts.map(post => <PostComponent 
+    name={post.name}
+    subtitle={post.subtitle}
+    time={post.time}
+    image={post.image}
+    description={post.description}
+  />)
+  
+  function addPost() {
+    setPosts([...posts, {
+      name: "Shoumik",
+      subtitle: "1M Followers",
+      time: "2m ago",
+      image: "https://media.istockphoto.com/id/931336618/vector/clock-vector-icon-isolated.jpg?s=612x612&w=0&k=20&c=II8EBJl8i6olqcrhAtKko74ydFEVbfCQ6s5Pbsx6vfas=",
+      description: "Pleased to tell you that, I have joined google as SDE-1....."
+    }])
   }
 
-  // setInterval(function(){
-  //   setCount(count+1);
-  // },2000)
-  return <div>
-    <h1 id="text">{count}</h1>
-    <button onClick={increaseCount}>Increase Count</button>
-  </div>
+  return (
+    <div style={{background: "#dfe6e9", height:"100vh"}}>
+      <button onClick={addPost}>Add post</button>
+      <div style={{display: flex, justifyContent: "center"}}>
+      <div> 
+       {postComponents}
+      </div>
+    </div>
+    </div>
+  )
 }
 
 export default App
