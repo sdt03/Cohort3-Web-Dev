@@ -30,5 +30,4 @@ function ToggleBulbState({bulbOn, setBulbOn}){
     <button onClick={toggle}>Toggle Button</button>
   </div>
 }
-
 export default App
