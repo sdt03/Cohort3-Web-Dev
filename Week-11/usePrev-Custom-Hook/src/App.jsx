@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import  usePrev from "./Hooks/usePrev"
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0);
 
-  prev = usePrev(count);
+  const prev = usePrev(count);
 
   return (
     <div>
