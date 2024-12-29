@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import './App.css'
-import { RecoilRoot, atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil'
 import { counterAtom } from './store/atoms/counter'
 
 function App() {
