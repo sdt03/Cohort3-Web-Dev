@@ -1,5 +1,5 @@
 import * as mongoDB from 'mongodb';
-import {dbURI} from './config';
+import {dbURI} from '../config';
 
 export async function connectDB(){
     try{
