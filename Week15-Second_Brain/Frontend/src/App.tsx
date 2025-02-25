@@ -1,11 +1,14 @@
 import { PlusIcon } from "./components/icons/PlusIcon";
+import { ShareIcon } from "./components/icons/ShareIcon";
 import { Button } from "./components/ui/Button";
+import { Card } from "./components/ui/Card";
 
 function App(){
   return(
     <>
-      <Button variant="primary" size="md" text={"Share"} onClick={()=>{}}/>
-      <Button startIcon={<PlusIcon size={"lg"}/>}variant="secondary" size="md" text={"Add Content"} onClick={()=>{}} />
+      <Button startIcon={<ShareIcon size={"md"}/>} variant="primary" size="sm" text={"Share Brain"} onClick={()=>{}}/>
+      <Button startIcon={<PlusIcon size={"md"}/>}variant="secondary" size="sm" text={"Add Content"} onClick={()=>{}} />
+      {/* <Card title={"Share Project"} type="youtube" link="youtube.com"/> */}
     </>
   )
   
