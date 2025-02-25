@@ -8,7 +8,7 @@ function App(){
     <>
       <Button startIcon={<ShareIcon size={"md"}/>} variant="primary" size="sm" text={"Share Brain"} onClick={()=>{}}/>
       <Button startIcon={<PlusIcon size={"md"}/>}variant="secondary" size="sm" text={"Add Content"} onClick={()=>{}} />
-      {/* <Card title={"Share Project"} type="youtube" link="youtube.com"/> */}
+      <Card title={"Share Project"} type="twitter" link="https://x.com/sdt0304/status/1863295148467298405"/>
     </>
   )
   
