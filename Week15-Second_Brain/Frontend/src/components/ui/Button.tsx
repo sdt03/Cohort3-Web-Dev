@@ -7,6 +7,7 @@ export interface ButtonProps{
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     onClick?: () => void;
+    loading?: boolean
 }
 
 const defaultStyles = "rounded-md px-4 py-2 flex font-light items-center"
@@ -22,8 +23,8 @@ const variantStyles = {
     "secondary": "bg-purple-200 text-purple-600"
 }
 
-export const Button = ({variant, size, text, startIcon, endIcon, onClick}: ButtonProps) => {
-    return <button onClick={onClick} className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} cursor-pointer`}>
+export const Button = ({variant, size, text, startIcon, endIcon, onClick, loading}: ButtonProps) => {
+    return <button onClick={onClick} className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${loading? "opacity45":""}  cursor-pointer`} disabled={loading}>
         {startIcon? <div className="pr-2">
             {startIcon}
         </div> : null} 
