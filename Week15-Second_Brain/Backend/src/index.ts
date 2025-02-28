@@ -7,9 +7,11 @@ import { ContentModel, UserModel, LinkModel } from './database/schema';
 import connectDB from './database/db.service';
 import { userMiddleware } from './middleware/useAuth';
 import { random } from './utils';
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 connectDB();
 
