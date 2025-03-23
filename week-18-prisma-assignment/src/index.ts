@@ -79,4 +79,27 @@ app.post("/travel", userMiddleware, async (req , res) => {
         console.error("error: ", error);
     }
 });
+
+app.get("/get-plans", userMiddleware, async(req, res)=>{
+    try{
+        const userId = req.userId;
+
+        const plans = await client.travel.findMany({
+            where: {
+                userId: userId
+            },
+            select: {
+                id: true,
+                title: true,
+                destinationCity: true,
+                destinationCountry: true,
+            }
+        });
+
+        res.json({plans});
+    } catch (error){
+
+    }
+});
+
 app.listen(3000);
