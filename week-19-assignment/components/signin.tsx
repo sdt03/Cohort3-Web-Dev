@@ -1,4 +1,6 @@
 "use client"
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { ChangeEventHandler, useRef } from "react";
 
 export function Signin() {
@@ -6,6 +8,8 @@ export function Signin() {
     const username = useRef("");
     const password = useRef("");
     const email = useRef("");
+
+    const router = useRouter();
 
     const handleInputChange = (field: "name" | "username" | "password" | "email") => (
         e: React.ChangeEvent<HTMLInputElement>
@@ -39,7 +43,20 @@ export function Signin() {
                 label="Password"
                 placeholder="••••••••"
             />
-            <button className="bg-black border border-gray-500 rounded-lg p-3 cursor-pointer hover:bg-gray-700 ">Sign In</button>
+            <button
+                className="bg-black border border-gray-500 rounded-lg p-3 cursor-pointer hover:bg-gray-700"
+                onClick={async()=> {
+                    const response =  axios.post("http://localhost:3000/api/user", {
+                        email,
+                        name,
+                        username,
+                        password
+                    });
+                    router.push("/");
+                }}
+                >
+                    Sign In
+                </button>
         </div>
     );
 }
