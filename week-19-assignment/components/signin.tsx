@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios";
+import { sign } from "crypto";
 import { useRouter } from "next/navigation";
 import React, { ChangeEventHandler, useRef } from "react";
 
@@ -46,14 +47,14 @@ export function Signin() {
             <button
                 className="bg-black border border-gray-500 rounded-lg p-3 cursor-pointer hover:bg-gray-700"
                 onClick={async()=> {
-                    const response =  axios.post("http://localhost:3000/api/user", {
-                        email,
-                        name,
-                        username,
-                        password
+                    const response =  axios.post("api/user", {
+                        email: email.current,
+                        name: name.current,
+                        username: username.current,
+                        password: password.current
                     });
                     router.push("/");
-                }}
+                }} type="button"
                 >
                     Sign In
                 </button>
