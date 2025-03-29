@@ -1,8 +1,9 @@
 "use client"
 import axios from "axios";
-import { sign } from "crypto";
 import { useRouter } from "next/navigation";
 import React, { ChangeEventHandler, useRef } from "react";
+import { z } from "zod";
+import bcrypt from 'bcrypt'
 
 export function Signin() {
     const name = useRef("");
@@ -11,6 +12,13 @@ export function Signin() {
     const email = useRef("");
 
     const router = useRouter();
+
+    const signUpSchema = z.object({
+        name: z.string().min(3, "Name must be at least 3 characters"),
+        username: z.string().min(3, "Username must be at least 3 characters"),
+        email: z.string().email("Invalid email format"),
+        password: z.string().min(6, "Password must be at least 6 characters"),
+    });
 
     const handleInputChange = (field: "name" | "username" | "password" | "email") => (
         e: React.ChangeEvent<HTMLInputElement>
@@ -21,6 +29,29 @@ export function Signin() {
         else if(field === "password") password.current = value;
         else if(field === "email") email.current = value;
     };
+
+    const handleSubmit = async () => {
+        const hashedPassword = await bcrypt.hash(password.current, 10);
+
+        try{
+            const formData = {
+                email: email.current,
+                name: name.current,
+                username: username.current,
+                password: hashedPassword
+            };
+
+            const validatedData = signUpSchema.safeParse(formData);
+
+            if(!validatedData){
+                return;
+            }
+            await axios.post("/api/user", formData);
+            router.push("/");
+        } catch (e) {
+            console.error("Something went wrong", e);
+        }
+    }
 
     return (
         <div className="max-w-md mx-auto mt-40 p-6 bg-white border border-gray-300 rounded-lg shadow-md flex flex-col items-center justify-center">
@@ -46,15 +77,8 @@ export function Signin() {
             />
             <button
                 className="bg-black border border-gray-500 rounded-lg p-3 cursor-pointer hover:bg-gray-700"
-                onClick={async()=> {
-                    const response =  axios.post("api/user", {
-                        email: email.current,
-                        name: name.current,
-                        username: username.current,
-                        password: password.current
-                    });
-                    router.push("/");
-                }} type="button"
+                onClick={handleSubmit} 
+                type="button"
                 >
                     Sign In
                 </button>
