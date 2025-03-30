@@ -8,11 +8,12 @@ datasource db {
 }
 
 model User{
-  id        Int     @default(autoincrement())   @id
+  id        String     @default(cuid())   @id
   email     String  @unique
   name      String
   username  String  @unique
   password  String 
+  token     String?
 
   events     Event[]
 }
@@ -23,9 +24,17 @@ model Event{
   date      DateTime
   location  String
   description String
-  createdById Int
+  createdById String
 
   createdBy   User    @relation(fields: [createdById], references: [id])
 
 }
 
+// model Session {
+//   id    Int     @default(autoincrement()) @id
+//   sessions
+//   jwtToken  String 
+//   userId    Int
+
+//   user      User    @relation(fields: [userId], references: [id])
+// }

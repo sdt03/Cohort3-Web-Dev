@@ -14,40 +14,39 @@ export function Signup() {
     const router = useRouter();
 
     const signUpSchema = z.object({
-        email: z.string().email("Invalid email format"),
         name: z.string().min(3, "Name must be at least 3 characters"),
         username: z.string().min(3, "Username must be at least 3 characters"),
-        password: z.string().min(8, "Password must be at least 6 characters"),
+        email: z.string().email("Invalid email format"),
+        password: z.string().min(6, "Password must be at least 6 characters"),
     });
 
     const handleInputChange = (field: "name" | "username" | "password" | "email") => (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
         const value = e.target.value;
-        if(field === "name") name.current = value;
-        else if(field === "username") username.current = value;
+        if(field === "username") username.current = value;
         else if(field === "password") password.current = value;
-        else if(field === "email") email.current = value;
+        
     };
 
     const handleSubmit = async () => {
+        const hashedPassword = await bcrypt.hash(password.current, 10);
+
         try{
             const formData = {
                 email: email.current,
                 name: name.current,
                 username: username.current,
-                password: password.current
+                password: hashedPassword
             };
 
             const validatedData = signUpSchema.safeParse(formData);
-            
-            if(!validatedData.success){
-                console.error("Validation error", validatedData.error);
+
+            if(!validatedData){
                 return;
             }
-
-            await axios.post("/api/user", validatedData.data);
-            router.push("/api/auth/signin");
+            await axios.post("/api/user", formData);
+            router.push("/");
         } catch (e) {
             console.error("Something went wrong", e);
         }

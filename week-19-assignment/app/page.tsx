@@ -1,27 +1,23 @@
-import axios from "axios";
 
-async function getUserDetails() {
-  try {
-    const response = await axios.get("http://localhost:3000/api/user")
-	  return response.data;
-  }  catch(e) {
-    console.log(e);
-  }
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import Signin from "./signin/page";
+
+const getUserDetails = async () => {
+  const session = await getServerSession();
+  return session;
 }
-export default async function Home() {
-  const userData = await getUserDetails();
 
+
+export default async function Home() {
+  const session = await getUserDetails();
+
+  if(session?.user){ 
+    redirect('/naste');
+  }
   return (
-    <div className="flex flex-col justify-center h-screen">
-        <div className="flex justify-center">
-            <div className="border p-8 rounded">
-                <div>
-                    Name: {userData?.name}
-                </div>
-                
-                {userData?.email}
-            </div>
-        </div>
+    <div>
+      <Signin />
     </div>
   );
 }
