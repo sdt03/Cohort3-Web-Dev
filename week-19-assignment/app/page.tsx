@@ -13,7 +13,7 @@ export default async function Home() {
   const session = await getUserDetails();
 
   if(session?.user){ 
-    redirect('/naste');
+    redirect('/event');
   }
   return (
     <div>

@@ -2,8 +2,16 @@
 import React, { useRef, useState } from "react"
 import { Input } from "./inputprops"
 import { CrossButton } from "./icons/close-button";
+import { useRouter } from "next/navigation";
+import { User } from "@/app/api/auth/[...nextauth]/route";
+import axios from "axios";
 
-export default function EventCard() {
+interface EventUser {
+    user: User | null
+}
+
+export default function EventCard({user}: EventUser) {
+    const router = useRouter();
     const title = useRef("");
     const date = useRef("");
     const description = useRef("");
@@ -20,6 +28,33 @@ export default function EventCard() {
         if(field === "location") location.current = value
     }
 
+    const handleSubmit = async () => {
+        if(!user?.token){
+            alert("You are not logged in!");
+            router.push("/api/auth/signin");
+            return;
+        }
+
+        const eventData = {
+            title: title.current,
+            date: date.current,
+            description: description.current,
+            location: location.current,
+            createdById: user.id,
+            createdBy: user.name
+        };
+
+        try{
+            await axios.post("/api/event", eventData);
+            console.log("Data sent!");
+        } catch(e) {
+            console.error("Error occurred", e);
+        }
+    }
+    if(isClosed) {
+        router.push("/");
+        return null;
+    }
 
     return (
         <div className="flex justify-center items-center min-h-screen">
@@ -36,7 +71,9 @@ export default function EventCard() {
                     <Input title="Description" onChange={handleInputChange("description")} placeholder="Enter description"/>
                     <Input title="Location" onChange={handleInputChange("location")} placeholder="Enter location"/>
                     
-                    <button className="w-full mt-2 px-5 py-3 cursor-pointer border border-gray-500 rounded-lg hover:bg-gray-200 transition">
+                    <button
+                    onClick={handleSubmit} 
+                    className="w-full mt-2 px-5 py-3 cursor-pointer border border-gray-500 rounded-lg hover:bg-gray-200 transition">
                         Submit
                     </button>
                 </div>

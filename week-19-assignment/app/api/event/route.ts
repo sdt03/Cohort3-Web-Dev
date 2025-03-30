@@ -5,14 +5,17 @@ export async function POST(req: NextResponse){
     const body = await req.json();
     
     try{
-        const event = await prisma.event.create({
+        await prisma.event.create({
             data: {
                 title: body.title,
                 date: body.date,
                 description: body.description,
                 location: body.location,
+                createdById: body.createdById,
+                createdBy: body.user
             }
         });
+        console.log("Event Created!");
     } catch (error) {
         console.error("Error occured: ", error);
     }

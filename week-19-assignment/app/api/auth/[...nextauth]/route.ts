@@ -7,7 +7,7 @@ import { randomUUID } from "crypto";
 import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
 
-interface CustomSession extends Session {
+export interface CustomSession extends Session {
   user: {
     id: string;
     jwtToken: string;
@@ -21,11 +21,10 @@ interface Token extends JWT {
   jwtToken: string;
 }
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
-  password: string;
   token: string;
 }
 
